@@ -51,7 +51,7 @@ public class huiwen {
     }
 
 	public String longestPalindrome3(String s) {
-		
+		return null;
 	}
 	public String longestPalindrome2(String s) {
 		int max_len = 0;
@@ -63,7 +63,6 @@ public class huiwen {
 			}else if (isPalindrome(s, i-max_len, i)) {
 				max_len = max_len + 1;
 				start_index = i-max_len+1;
-		
 			}
 		}
 		return s.substring(start_index, start_index+max_len);
