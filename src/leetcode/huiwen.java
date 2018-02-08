@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author 12260
@@ -7,14 +9,17 @@ package leetcode;
  */
 public class huiwen {
 	public static void main(String[] strings) {
-		String s = "2332";
-
+		String s = "babad";
 		
-		// System.out.println(end2-start2);
-		System.out.println((new huiwen()).longestPalindrome2(s));
+		System.out.println((new huiwen()).longestPalindrome3(s));
 		// return s.subString(start+1, end);
 	}
 	
+	/**
+	 * 从中间向两边扩展
+	 * @param s
+	 * @return
+	 */
 	public String longestPalindrome(String s) {
 		int first = 0, last = 0;
 		int start2 = 0, end2 = 0;
@@ -50,9 +55,47 @@ public class huiwen {
 		return s.substring(start2, end2 + 1);
     }
 
+	
+	/**
+	 * manacher 算法
+	 * @param s
+	 * @return
+	 */
 	public String longestPalindrome3(String s) {
-		return null;
+		StringBuilder stringBuilder = new StringBuilder("#");
+		for( int i=0; i<s.length(); i++) {
+			stringBuilder.append( s.charAt(i) + "#");
+		}
+		
+		int pos=0, maxRight=0;
+		int[] radis = new int[stringBuilder.length()];
+		for( int i=0;i<radis.length; i++) {
+			radis[i]=0;
+		}
+		for( int i=0; i<stringBuilder.length(); i++) {
+			if(i < maxRight) {
+				radis[i] = Math.min(radis[2*pos-i], maxRight-i);
+			}
+			while (i>radis[i] && i+radis[i]<stringBuilder.length()-1 && stringBuilder.charAt(i-1-radis[i])==stringBuilder.charAt(i+radis[i]+1)) {
+				radis[i]++;
+			}
+			if( i+radis[i] > maxRight) {
+				pos = i;
+				maxRight = i+radis[i];
+			}
+		}
+	//	System.out.println(s);
+		int res_pos = 0;
+		for( int i=0; i<radis.length; i++) {
+			res_pos = radis[res_pos] > radis[i] ?  res_pos : i;
+		}
+		return stringBuilder.substring(res_pos-radis[res_pos], res_pos+radis[res_pos]+1).replaceAll("#", "");
 	}
+	/**
+	 * 从外侧向中间扩展
+	 * @param s
+	 * @return
+	 */
 	public String longestPalindrome2(String s) {
 		int max_len = 0;
 		int start_index = 0;
