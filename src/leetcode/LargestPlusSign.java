@@ -24,5 +24,6 @@ public class LargestPlusSign {
 	        		//if(hashSet.contains());
 	        	}
 	        }
+	        return 0;
 	    }
 }
