@@ -8,7 +8,7 @@ public class zhengze {
 
 	public static void main(String[] args) {
 		
-		System.out.println(new zhengze().isMatch2("aa", ".*"));
+		System.out.println(new zhengze().isMatch2("aa", "a*"));
 	
 	}
 
@@ -98,7 +98,7 @@ public class zhengze {
 	}
 
 	/**
-	 * 跟自己想的大同小异 不过没有吧pattern 分为一段一段 ，也就省略了ArrayList的使用 ，更方便一些   
+	 * 跟自己想的大同小异 不过没有吧pattern 分为一段一段 ，也就省略了ArrayList的使用 ，更方便一些   空间复杂度 n*n
 	 * @param s
 	 * @param p
 	 * @return
@@ -124,13 +124,25 @@ public class zhengze {
 					matrix[i][j] = matrix[i-1][j-1] && p.charAt(j-1)==s.charAt(i-1);
 				}else {
 					matrix[i][j] = (matrix[i][j-2])//从左到右
-							||(matrix[i-1][j] && p.charAt(j-2)==s.charAt(i-1))//从上到下
-							||(matrix[i-1][j-2] && p.charAt(j-2)==s.charAt(i-1))//左上到右下
-							|| (p.charAt(j-2) == '.' && matrix[i-1][j-2]);//左上到右下 且 是.*
+							||(matrix[i-1][j] && (p.charAt(j-2)==s.charAt(i-1) || p.charAt(j-2)=='.'));//从上到下
+							//||(matrix[i-1][j-2] && p.charAt(j-2)==s.charAt(i-1))//左上到右下
+							//|| (p.charAt(j-2) == '.' && matrix[i-1][j-2]);//左上到右下 且 是.*
 				}
 			}
 			//System.out.println(matrix[1][1]);
 		}
 		return matrix[s.length()][p.length()];
+	}
+	
+	/**
+	 * 
+	 * 与上一个方法基本类似  空间复杂度降为n 因为Boolean值 不外乎true 或者false 懒得写了
+	 * @param s
+	 * @param p
+	 * @return
+	 */
+	public boolean isMatch3(String s, String p) {
+		
+		return false;
 	}
 }
