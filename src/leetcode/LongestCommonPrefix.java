@@ -6,32 +6,54 @@ public class LongestCommonPrefix {
 		// TODO Auto-generated method stub
 
 		String[] strings = {"bab","bcc" };
-		System.out.println(new StringBuffer().toString());
+		System.out.println(new LongestCommonPrefix().longestCommonPrefix(strings));
 	}
 
 	 public String longestCommonPrefix(String[] strs) {
-		 if(strs.length == 0) {
-			 return null;
-		 }
-	        int shortest = 0;
-	       
-	        for(int i=0; i<strs.length; i++) {
-	        	shortest = strs[shortest].length() < strs[i].length()? shortest :i;
-	        }
-	        String shortest_str = strs[shortest];
-	        StringBuilder stringBuilder = new StringBuilder();
-	        for(int i=0; i<shortest_str.length(); i++) {
-	        	stringBuilder.append(shortest_str.charAt(i));
-	        	String tmp = stringBuilder.toString();
-	        	for( int j=0; j<strs.length; j++) {
-	        		if(strs[i].startsWith(tmp)) {
-	        			
-	        		}else {
-	        			stringBuilder.deleteCharAt(stringBuilder.length()-1);
-						return stringBuilder.toString();
+		 if (strs.length == 0) {
+			return "";
+		}
+		
+		 StringBuilder stringBuilder = new StringBuilder();
+		 char c = ' ';
+		 for(int i=0; true; i++) {
+			 for(int j=0; j<strs.length; j++) {
+				 if(i>=strs[j].length()) {
+					 return stringBuilder.toString();
+				 }else {
+					if(j==0) {
+						c = strs[0].charAt(i);
+					}else{
+						if(strs[j].charAt(i) != c) {
+							return stringBuilder.toString();
+						}
+						
 					}
-	        	}
-	        }
-	        return stringBuilder.toString();
+					if(j == strs.length-1) {
+						stringBuilder.append(c);
+					}
+				}
+			 }
+		 }
 	    }
+	 /**
+	  * 其实不用stringbuilder也可以
+	  * @param strs
+	  * @return
+	  */
+	 public String longestCommonPrefix2(String[] strs) {
+		 if( strs.length == 0) {
+			 return "";
+		 }
+		 int i=0;
+		 for(; i<strs[0].length(); i++) {
+			 char c = strs[0].charAt(i);
+			 for (String string : strs) {
+				if(i>=string.length() || string.charAt(i) != c ) {
+					return strs[0].substring(0, i);
+				}
+			}
+		 }
+		 return strs[0].substring(0, i);
+	 }
 }
