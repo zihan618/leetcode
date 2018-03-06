@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-public class zhengze {
+public class RegularExpression {
 
 	public static void main(String[] args) {
 		
-		System.out.println(new zhengze().isMatch2("aa", "a*"));
+		System.out.println(new RegularExpression().isMatch2("aa", "a*"));
 	
 	}
 
