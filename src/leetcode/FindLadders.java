@@ -34,12 +34,12 @@ public class FindLadders {
 	public  List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
 		//初始化矩阵
 		boolean[][] table = new boolean[wordList.size()][wordList.size()];
-		Object[] strings = wordList.toArray();
+		String[] strings = new String[wordList.size()];
+		wordList.toArray(strings);
 
 		for (int i = 0; i < table.length; i++) {
 			for (int j = 0; j < table[i].length; j++) {
-				table[i][j] = isClosed(strings[i].toString(), strings[j].toString());
-				System.out.println(table[i][j]);
+				table[i][j] = isClosed(strings[i], strings[j]);
 			}
 		}
 		//字符串全部存入数据结构之内 
