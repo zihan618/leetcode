@@ -3,7 +3,7 @@ package leetcode;
 public class FindtheClosestPalindrome {
 
 	public static void main(String[] args) {
-		System.out.println(new FindtheClosestPalindrome().nearestPalindromic("1"));
+		System.out.println(new FindtheClosestPalindrome().nearestPalindromic("2147483647"));
 	}
 
 	public String nearestPalindromic(String n) {
@@ -57,19 +57,37 @@ public class FindtheClosestPalindrome {
 
 			stringBuilder.delete(0, stringBuilder.length());
 			stringBuilder.append(pre - 1);
-			stringBuilder.append(new StringBuilder(stringBuilder.toString()).reverse().toString());
+			if(stringBuilder.length() < n.length() / 2) {
+				stringBuilder.delete(0, stringBuilder.length());
+				for(int i=0; i<n.length()-1; i++) {
+					stringBuilder.append(9);
+				}
+			}else {
+				stringBuilder.append(new StringBuilder(stringBuilder.toString()).reverse().toString());				
+			}
 			int res2 = Integer.parseInt(stringBuilder.toString());
 
 			stringBuilder.delete(0, stringBuilder.length());
 			stringBuilder.append(pre + 1);
-			stringBuilder.append(new StringBuilder(stringBuilder.toString()).reverse().toString());
+			if(stringBuilder.length() < n.length() / 2) {
+				stringBuilder.delete(0, stringBuilder.length());
+				for(int i=0; i<n.length(); i++) {
+					stringBuilder.append(9);
+				}
+			}else {
+				stringBuilder.append(new StringBuilder(stringBuilder.toString()).reverse().toString());
+			}
 			int res3 = Integer.parseInt(stringBuilder.toString());
 
 			int std = Integer.parseInt(n);
 			int res = Math.abs(res1 - std) < Math.abs(res2 - std) ? res1 : res2;
-			res = Math.abs(res1 - std) == Math.abs(res2 - std) ? Math.min(res1, res2) : res;
+			if(Math.abs(res1 - std) == Math.abs(res2 - std) ) {
+				res = Math.min(res1, res2) ;
+			}
 			res = Math.abs(res - std) < Math.abs(res3 - std) ? res : res3;
-			res = Math.abs(res - std) == Math.abs(res3 - std) ? Math.min(res, res3) : res;
+			if(Math.abs(res - std) == Math.abs(res3 - std)) {
+				res = Math.min(res, res3) ;
+			}
 			return String.valueOf(res);
 		}
 
