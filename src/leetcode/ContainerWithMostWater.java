@@ -7,7 +7,7 @@ public class ContainerWithMostWater {
 	}
 
 	/**
-	 * 暴力解法
+	 * 鏆村姏瑙ｆ硶
 	 * 
 	 * @param height
 	 * @return
